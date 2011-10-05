@@ -3,17 +3,19 @@
     <title>stickFIG</title>
     <script type="text/javascript" src="javascript/main.js"></script>
     <script>
-      window.onload = function(){
 
-        var C     = { canvas:'', w:320, h:240, x:0, y:0                 } ; //canvas object
-        var MOUSE = { x:0, y:0, dwn:false, mov:false, sel:false         } ; //mouse state object
-        var MENU  = { x:0, y:0, active:false, time:0, dur:20, radius:30 } ;
-        var DEBUG = { toggle:true                                       } ;
+      var CTX                                                           ;
+      var C     = { canvas:'', w:320, h:240, x:0, y:0                 } ; //canvas object
+      var MOUSE = { x:0, y:0, dwn:false, mov:false, sel:false         } ; //mouse state object
+      var MENU  = { x:0, y:0, active:false, time:0, dur:20, radius:30 } ;
+      var DEBUG = { toggle:true                                       } ;
+
+      window.onload = function(){
 
         C.canvas = initCanvas(C.w, C.h)      ;
         C.x      = C.canvas.offsetLeft       ; //delta from x.offsetParent (body)
         C.y      = C.canvas.offsetTop        ; //alt                              = e.offsetX (will tile?)
-        var CTX  = C.canvas.getContext('2d') ;
+        CTX      = C.canvas.getContext('2d') ;
 
         function documentMouseMoveHandler(event) {
           MOUSE.x   = event.clientX - C.x ;
@@ -26,14 +28,12 @@
         }
 
         function documentMouseUpHandler(event) {
-          MOUSE.dwn                  = false                   ;
-          document.body.style.cursor = 'default'               ;
+          MOUSE.dwn                  = false     ;
+          document.body.style.cursor = 'default' ;
         }
 
         function update(){
-          //clear canvas
-          CTX.fillStyle = 'rgba(122,122,122,1.0)' ;
-          CTX.fillRect(0, 0, C.w, C.h)            ;
+          clearCanvas();
         } 
 
         (function(){ 
