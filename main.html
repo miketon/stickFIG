@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>stickFIG</title>
+    <script>
+      window.onload = function(){
+        alert('StickFigure Ready!');
+        $      = function(id)  { return document.getElementById(id) } ;
+        var dc = function(tag) { return document.createElement(tag) } ;
+
+        var C     = { canvas:'', w:320, h:240, x:0, y:0                 } ; //canvas object
+        var MOUSE = { x:0, y:0, dwn:false, mov:false, sel:false         } ; //mouse state object
+        var MENU  = { x:0, y:0, active:false, time:0, dur:20, radius:30 } ;
+        var DEBUG = { toggle:true                                       } ;
+
+        C.canvas        = dc('canvas')        ;
+        C.canvas.id     = 'canvasMT'          ;
+        C.canvas.width  = C.w                 ;
+        C.canvas.height = C.h                 ;
+        document.body.appendChild(C.canvas)   ;
+        var CTX   = C.canvas.getContext('2d') ;
+
+        C.x = C.canvas.offsetLeft ; //delta from x.offsetParent (body)
+        C.y = C.canvas.offsetTop  ; //alt = e.offsetX (will tile?)
+
+        function documentMouseMoveHandler(event) {
+          MOUSE.x   = event.clientX - C.x ;
+          MOUSE.y   = event.clientY - C.y ;
+        }
+
+        function documentMouseDownHandler(event) {
+          MOUSE.dwn = true  ;
+          document.body.style.cursor = 'pointer' ;
+        }
+
+        function documentMouseUpHandler(event) {
+          MOUSE.dwn                  = false                   ;
+          document.body.style.cursor = 'default'               ;
+        }
+
+        function update(){
+          //clear canvas
+          CTX.fillStyle = 'rgba(122,122,122,1.0)' ;
+          CTX.fillRect(0, 0, C.w, C.h)            ;
+        } 
+
+        (function(){ 
+          // Register event listeners
+          document.addEventListener('mousemove' , documentMouseMoveHandler , false ) ;
+          document.addEventListener('mousedown' , documentMouseDownHandler , false ) ;
+          document.addEventListener('mouseup'   , documentMouseUpHandler   , false ) ;
+
+          setInterval(update, 20)      ;
+
+        })();
+      }
+    </script>
+  </head>
+  <body id='body' bgcolor="#AAAAAA" align='center'>
+  </body>
+</html>
