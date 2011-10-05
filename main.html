@@ -1,26 +1,19 @@
 <html>
   <head>
     <title>stickFIG</title>
+    <script type="text/javascript" src="javascript/main.js"></script>
     <script>
       window.onload = function(){
-        alert('StickFigure Ready!');
-        $      = function(id)  { return document.getElementById(id) } ;
-        var dc = function(tag) { return document.createElement(tag) } ;
 
         var C     = { canvas:'', w:320, h:240, x:0, y:0                 } ; //canvas object
         var MOUSE = { x:0, y:0, dwn:false, mov:false, sel:false         } ; //mouse state object
         var MENU  = { x:0, y:0, active:false, time:0, dur:20, radius:30 } ;
         var DEBUG = { toggle:true                                       } ;
 
-        C.canvas        = dc('canvas')        ;
-        C.canvas.id     = 'canvasMT'          ;
-        C.canvas.width  = C.w                 ;
-        C.canvas.height = C.h                 ;
-        document.body.appendChild(C.canvas)   ;
-        var CTX   = C.canvas.getContext('2d') ;
-
-        C.x = C.canvas.offsetLeft ; //delta from x.offsetParent (body)
-        C.y = C.canvas.offsetTop  ; //alt = e.offsetX (will tile?)
+        C.canvas = initCanvas(C.w, C.h)      ;
+        C.x      = C.canvas.offsetLeft       ; //delta from x.offsetParent (body)
+        C.y      = C.canvas.offsetTop        ; //alt                              = e.offsetX (will tile?)
+        var CTX  = C.canvas.getContext('2d') ;
 
         function documentMouseMoveHandler(event) {
           MOUSE.x   = event.clientX - C.x ;
@@ -28,7 +21,7 @@
         }
 
         function documentMouseDownHandler(event) {
-          MOUSE.dwn = true  ;
+          MOUSE.dwn                  = true      ;
           document.body.style.cursor = 'pointer' ;
         }
 
