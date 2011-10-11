@@ -3,19 +3,13 @@
     <title>stickFIG</title>
     <script type="text/javascript" src="javascript/main.js"></script>
     <script>
-
-      var CTX                                                           ;
-      var C     = { canvas:'', w:320, h:240, x:0, y:0                 } ; //canvas object
-      var MOUSE = { x:0, y:0, dwn:false, mov:false, sel:false         } ; //mouse state object
-      var MENU  = { x:0, y:0, active:false, time:0, dur:20, radius:30 } ;
-      var DEBUG = { toggle:true                                       } ;
-
+      alert('Starting on load');
       window.onload = function(){
 
-        C.canvas = initCanvas(C.w, C.h)      ;
-        C.x      = C.canvas.offsetLeft       ; //delta from x.offsetParent (body)
-        C.y      = C.canvas.offsetTop        ; //alt                              = e.offsetX (will tile?)
-        CTX      = C.canvas.getContext('2d') ;
+        C.init()                                                          ; //init Canvas
+        var MOUSE = { x:0, y:0, dwn:false, mov:false, sel:false         } ; //mouse state object
+        var MENU  = { x:0, y:0, active:false, time:0, dur:20, radius:30 } ;
+        var DEBUG = { toggle:true                                       } ;
 
         function documentMouseMoveHandler(event) {
           MOUSE.x   = event.clientX - C.x ;
@@ -31,9 +25,9 @@
           MOUSE.dwn                  = false     ;
           document.body.style.cursor = 'default' ;
         }
-
+        alert('ending onload');
         function update(){
-          clearCanvas();
+          // C.clearCanvas();
         } 
 
         (function(){ 
