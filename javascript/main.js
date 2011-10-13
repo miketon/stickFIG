@@ -28,4 +28,11 @@
     }()                                     ;
   }
 
+  function debugPrint(text, x, y){
+    CTX.setTransform(1,0,0,1,MOUSE.x,MOUSE.y) ; //reset canvas
+    CTX.fillStyle = '#DDD'                    ;
+    CTX.font      = '10pt Helvetica'          ;
+    CTX.fillText(text, 0, 0)                  ;
+  }
+
 })();
